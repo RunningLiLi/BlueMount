@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgb(177, 241, 233)
+    }
+    .outer{
+        width: 700px;
+        height: 700px;
+        background-color: white;
+        margin: 0 auto;
+    }
+    .top{
+        position: relative;
+        width: 100%;
+        height: 400px;
+        background-image: url(./src/图片1.png);
+        background-size: cover;
+    }
+    .top ul{
+        position: absolute;
+        list-style: none;
+        right: 100px;
+        top: 12px;
+    }
+    .top ul li{
+        display: inline-block;
+        font-size: smaller;
+        padding-bottom: 3px;
+        margin-left: 30px;
+        cursor: pointer;
+    }
+    .top ul li:hover{
+        color: rgb(201, 160, 247);    
+        border-bottom: 2px solid rgb(201, 160, 247);
+    }
+   
+    #brand{
+        position: absolute;
+        left: 50px;
+        top: 20px;
+        width: 40px;
+        height: 40px;
+    }
+    #search{
+        position: absolute;
+        right: 50px;
+        top: 27px;
+        width: 20px;
+        height: 20px;
+    }
+    .bottom{
+        display: flex;
+        width: 100%;
+        height: 300px;
+        padding-top: 40px;
+        justify-content: space-around;
+
+    }
+    .bottom div{
+        width: 150px;
+        height:200px;
+    }
+    .bottom img{
+        margin-left: 40px;
+    }
+</style>
+<body>
+    <div class="outer">
+        <div class="top">
+            <img src="./src/腾讯视频.png" id="brand">
+            <ul>
+                <li>HOME</li>
+                <li>ABOUT US</li>
+                <li>SERVICES</li>
+                <li>REFERENCES</li>
+                <li>CONTACTS</li>
+            </ul>
+            <img src="./src/搜索.png" id="search">
+        </div>
+        <div class="bottom">
+            <div>
+                <img src="./src/key.png">
+                <p>The background-image CSS property sets one or more background images on an element</p>
+            </div>
+            <div>
+                <img src="./src/循环.png">
+                <p>The background-image CSS property sets one or more background images on an element</p>
+            </div>
+            <div>
+                <img src="./src/笔尺.png">
+                <p>The background-image CSS property sets one or more background images on an element</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

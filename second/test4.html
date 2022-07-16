@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: rgb(71, 71, 71);
+    }
+
+    .outer {
+        height: 300px;
+        width: 250px;
+        margin-left: 40%;
+        margin-top: 500px;
+        perspective: 1200px;
+
+    }
+
+    .rotatingBody {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        transform-style: preserve-3d;
+    }
+
+    .outer img {
+        position: absolute;
+        box-shadow: 0 0 10px white;
+        height: 300px;
+        width: 250px;
+        top: 0px;
+    }
+    .viewbox{
+        transform-style: preserve-3d;
+        transform: rotateX(-40deg);
+    }
+</style>
+
+<body>
+    <div class="outer">
+        <div class="viewbox">
+            <div class="rotatingBody">
+                <img src="./src/p1.jpg" alt="">
+                <img src="./src/p2.jpg" alt="">
+                <img src="./src/p3.jpg" alt="">
+                <img src="./src/p4.jpg" alt="">
+                <img src="./src/p5.jpg" alt="">
+                <img src="./src/p6.jpg" alt="">
+                <img src="./src/p7.jpg" alt="">
+                <img src="./src/p8.jpg" alt="">
+                <img src="./src/p9.jpg" alt="">
+                <img src="./src/p10.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let imgs = document.querySelectorAll('img')
+    let demo = 2 * Math.PI / 360
+    let deg = (360 / imgs.length)
+    let hudu = (deg / 2) * demo
+    let r = (imgs[0].clientWidth / 2) / Math.tan(hudu)
+    imgs.forEach((node, key) => {
+        node.style.transform = ` rotateY(${key * deg}deg) translateZ(${r + 30}px) rotateX(-5deg)`
+    })
+    let body = document.querySelector(".rotatingBody")
+    body.style.transform = `translateZ(${-2 * (r + 30)}px) rotateX(-30deg)`
+    let count = 1
+    setInterval(() => {
+        body.style.transform = ` translateZ(${-2 * (r + 30)}px) rotateY(${count++}deg)`
+    }, 30)
+</script>
+
+</html>
