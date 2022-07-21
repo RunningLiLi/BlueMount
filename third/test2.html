@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: rgb(242, 156, 203);
+    }
+    .outer{
+        display: grid;
+        margin: 100px auto;
+        width: 320px;
+      
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(6,1fr);
+        gap: 2px;
+        background-color: white;
+    }
+    .outer :nth-child(1){
+        white-space: nowrap;
+        height: 80px;
+        color: white;
+        background-color: rgb(56, 28, 51);
+        grid-column-start: 1;
+        grid-column-end: 5;  
+    }
+    .outer :nth-child(2){
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+    .outer :nth-last-child(1){
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+    .outer div{
+        background-color: rgb(250, 223, 242);
+        text-align: center;
+        line-height:80px ;
+        font-size: larger;
+    }
+</style>
+<body>
+    <div class="outer">
+        <div id='show'></div>
+        <div>AC</div>
+        <div>清除</div>
+        <div>/</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>*</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>+</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>-</div>
+        <div>.</div>
+        <div>0</div>
+        <div>=</div>
+    </div>
+</body>
+<script>
+    const show=document.querySelector("#show")
+    document.querySelector(".outer").addEventListener("click",(e)=>{
+        let {id,innerHTML,className}=e.target
+        if(id=='show'||className=="outer")return;
+        e.target.style.backgroundColor='pink'
+        setTimeout(()=>{e.target.style.backgroundColor='rgb(250, 223, 242)'},200)
+        try{
+            if(innerHTML=='='&&eval(show.innerHTML)!=Infinity){
+                show.insertAdjacentHTML("beforeend","="+eval(show.innerHTML))
+                return
+            }else if(innerHTML=='='){
+                throw new Error("除数不能为0")
+            }
+        }catch(e){
+            
+            alert(e)
+            setTimeout(()=>{show.innerHTML=''})
+        }
+        if(innerHTML!="AC"&&innerHTML!="清除"){show.insertAdjacentHTML("beforeend",innerHTML)}
+        else if(innerHTML=="AC"){show.innerHTML=''}
+        else{show.innerHTML=show.innerHTML.slice(0,show.innerHTML.length-1)}
+    })
+</script>
+</html>

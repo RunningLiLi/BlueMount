@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: rgb(44, 42, 42);
+    }
+
+    .outer {
+        margin: 100px auto;
+        width: 1000px;
+        height: 500px;
+        perspective: 1000px;
+
+    }
+
+    .contain {
+        position: relative;
+        height: 200px;
+        width: 860px;
+        left: 50%;
+        transform-style: preserve-3d;
+        top: 100px;
+        transform: translateX(-50%) rotateX(-20deg) rotateY(-9deg) ;
+    }
+
+    .contain>:nth-child(2) {
+        left: 220px;
+    }
+
+    .contain> :nth-child(3) {
+        left: 440px;
+    }
+
+    .contain> :nth-child(4) {
+        left: 660px;
+    }
+
+    .onepart {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        transition:transform 0.5s linear ;
+        transform-origin: 0 100px  -100px;
+    }
+
+    .onepart div {
+        position: absolute;
+        text-align: center;
+        line-height: 200px;
+        font-size: 50px;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(191, 201, 200);
+        border: 1px solid black;
+    }
+
+    .onepart div:nth-child(6) {
+        transform: rotateY(90deg) translateX(100px) translateZ(100px);
+    }
+
+    .onepart div:nth-child(2) {
+        
+        transform: rotateX(90deg) translateY(-100px) translateZ(100px);
+    }
+
+    .onepart div:nth-child(3) {
+        
+        transform: translateZ(-200px) rotateX(180deg);
+    }
+
+    .onepart div:nth-child(4) {
+        transform: rotateX(-90deg) translateY(100px) translateZ(100px);
+    }
+
+    .onepart div:nth-child(5) {
+        transform: rotateY(-90deg) translateX(-100px) translateZ(100px);
+    }
+</style>
+
+<body>
+    <div class="outer">
+        <div class="contain">
+            <div class="onepart">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="onepart">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="onepart">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="onepart">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+<script>
+    let time=(new Date(2022, 8, 2) - new Date()) / 1000
+    const onepart = document.querySelectorAll(".onepart")
+    const divs1 = onepart[0].querySelectorAll("div")
+    const divs2 = onepart[1].querySelectorAll("div")
+    const divs3 = onepart[2].querySelectorAll("div")
+    const divs4 = onepart[3].querySelectorAll("div")
+    let day = Math.floor(time / (24 * 60 * 60))
+    let hour = Math.floor((time % (24 * 60 * 60)) / (60 * 60))
+    let minute = Math.floor((((time % (24 * 60 * 60)) / (60 * 60)) % 1) * 60)
+    let second = Math.floor((((((time % (24 * 60 * 60)) / (60 * 60)) % 1) * 60) % 1) * 60)
+    divs1[0].innerHTML = day + "天"
+    divs1[1].innerHTML=day-1+'天'
+    divs2[0].innerHTML = hour + "时"
+    divs2[1].innerHTML = (hour-1)%24 + "时"
+    divs3[0].innerHTML = minute+ "分"
+    divs3[1].innerHTML = (minute-1)%60+ "分"
+    divs4[0].innerHTML = second+"秒"
+    divs4[1].innerHTML = (second-1)%60+"秒"
+    let count1=0
+    let count2=0
+    let count3=0
+    let count4=0
+    setInterval(() => {
+        count1++
+        time=(new Date(2022, 8, 2) - new Date()) / 1000
+        day = Math.floor( time/ (24 * 60 * 60))
+        hour = Math.floor((time % (24 * 60 * 60)) / (60 * 60))
+        minute = Math.floor((((time % (24 * 60 * 60)) / (60 * 60)) % 1) * 60)
+        second = Math.floor((((((time % (24 * 60 * 60)) / (60 * 60)) % 1) * 60) % 1) * 60)
+        if(divs1[(count2)%4].innerHTML!=day+'天'){
+            count2++
+            onepart[0].style.transform=`rotateX(${count2*-90}deg)`
+            divs1[(count2+1)%4].innerHTML = (day-1)>0?day-1+ "天":0+"天"
+        }
+        if(divs2[(count3)%4].innerHTML != hour+'时'){
+            count3++
+            onepart[1].style.transform=`rotateX(${count3*-90}deg)`
+            divs2[(count3+1)%4].innerHTML = (hour-1)>0?(hour-1)+'时':59+hour + "时"
+        }
+        if( divs3[(count4)%4].innerHTML != minute+"分"){
+            count4++
+            onepart[2].style.transform=`rotateX(${count4*-90}deg)`
+            divs3[(count4+1)%4].innerHTML = (minute-1)>0?(minute-1)+'分':59+minute + "分"
+        }
+        onepart[3].style.transform=`rotateX(${count1*-90}deg)`
+        divs4[(count1+1)%4].innerHTML = (second-1)>=0?(second-1)+'秒':59+second+ "秒"
+    }, 1000)
+
+
+
+
+
+</script>
+
+</html>

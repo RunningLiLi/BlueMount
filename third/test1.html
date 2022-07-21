@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .outer{
+        width: 500px;
+        height: auto;
+        margin:100px auto;
+        background-color: pink;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+    }
+    .header{
+        margin-top: 40px;
+        width: 100%;
+        height: 100px;
+    }
+    .header h3{
+        color: white;
+        text-align: center;
+    }
+    .input{
+        font-size: 0;
+        width: 390px;
+        margin: 5px auto;
+    }
+    .input input{
+        outline: none;
+        padding-left: 10px;
+        width:300px;
+        height: 30px;
+        border: none;
+        border-radius:10px  0  0 10px;
+    }
+    .input button{
+        height: 30px;
+        width: 80px;
+        background-color: rgb(231, 118, 137);
+        border: none;
+        border-radius: 0 10px 10px 0;
+    }
+    .body{
+        width: 100%;
+        height: auto;
+    }
+    .list{
+        list-style: none;
+        background-color: rgb(247, 242, 242);
+    }
+    .list>li:hover{
+        background-color: rgb(230, 222, 222);
+    }
+    .list>li{ 
+        height: 30px;
+        line-height: 30px;
+        background-color: rgb(247, 242, 242);
+    }
+    .list>li>div{
+        height: 30px;
+        width: 90%;
+        margin-left: 30px;
+        line-height: 30px;
+    }
+    .list>li>div :nth-child(1){
+        float: left;
+    }
+    .list>li>div :nth-child(2){
+        float: right;
+        text-align: center;
+        cursor: pointer;
+        width: 30px;
+    }
+    .finish{
+        background-color:rgb(228, 194, 194)!important;
+        color: white;
+        position: relative;
+    }
+    .finish span:nth-child(1) {
+        text-decoration:line-through;
+    }
+    .finish div::before{
+        content:"✔️ " ;
+        position: absolute;
+        left: 5px;
+        float: left;
+    }
+</style>
+<body>
+    <div class="outer">
+        <div class="header">
+            <h3>My To Do List</h3>
+            <div class="input"><input type="text" placeholder="记录一下"> <button id="but">Add</button></div>       
+        </div>
+        <div class="body">
+            <ul class="list">
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    const input=document.querySelector(".input>input")
+    const button=document.querySelector("#but")
+    const list=document.querySelector(".list")
+    button.addEventListener("click",()=>{
+        if(input.value.trim()!==''){
+            list.insertAdjacentHTML("beforeend",`<li><div><span>${input.value}</span><span>×</span></div></li>`)
+            const li=document.querySelector(".list>li:nth-last-child(1)")
+            li.addEventListener("click",()=>{
+                li.classList.toggle("finish")
+            })
+            li.querySelector("div span:nth-child(2)").addEventListener("click",()=>{
+                li.remove()
+            })
+            input.value=''
+        }else{
+            alert("不能加入空字符串")
+        }
+    })
+</script>
+</html>
